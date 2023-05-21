@@ -3,7 +3,7 @@ using lab16_ex2.Models;
 
 Console.WriteLine("Hello, World!");
 
-var ctx = new AutovehiculDbContext();
+using var ctx = new AutovehiculDbContext();
 /*Afisati toate autovehiculele in ordine descrescatoare a anului de fabricatie*/
 ctx.Autovehicule.OrderByDescending(a => a.AnFabricatie).ToList().ForEach(a=> Console.WriteLine(a));
 
