@@ -21,8 +21,6 @@ auto.ForEach(a =>
 static void Seed()
 {
     using var ctx = new AutovehiculDbContext();
-    ctx.Database.EnsureCreated();
-
     ctx.Autovehicule.Add(new Autovehicul
     {
         AnFabricatie = 2020,
