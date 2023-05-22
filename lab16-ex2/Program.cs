@@ -1,23 +1,24 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using lab16_ex2.Models;
-
+Seed();
 Console.WriteLine("Hello, World!");
 
 using var ctx = new AutovehiculDbContext();
 /*Afisati toate autovehiculele in ordine descrescatoare a anului de fabricatie*/
-ctx.Autovehicule.OrderByDescending(a => a.AnFabricatie).ToList().ForEach(a=> Console.WriteLine(a));
+var auto1 = ctx.Autovehicule.OrderByDescending(a => a.AnFabricatie).ToList();
+    auto1.ForEach(a=> Console.WriteLine(a));
 
 /*Afisati autovehiculele grupate in functie de numele producatorului sub forma
 “Autovehiculele producatorului Trabant”: 
 Id, nume, serie, an de fabricatie */
 
-var auto= ctx.Autovehicule.GroupBy(a => a.Producator.Nume).ToList();
+var auto = ctx.Autovehicule.GroupBy(a => a.Producator.Nume).ToList();
 auto.ForEach(a =>
 {
     Console.WriteLine($"auto ale producatorului {a.Key}");
     a.ToList().ForEach(a => Console.WriteLine(a));
 });
-//Seed();
+
 static void Seed()
 {
     using var ctx = new AutovehiculDbContext();
@@ -44,4 +45,6 @@ static void Seed()
         SeriSasiu = Guid.NewGuid().ToString(),
         Producator = new Producator { Nume = "Renault", Adresa = "Bulevardul Expozitiei 1" },
     });
+
+    ctx.SaveChanges();
 }
